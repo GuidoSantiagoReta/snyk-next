@@ -36,5 +36,5 @@ jobs:
           git config --global user.name "GitHub Action"
           git add package.json
           git commit -m "Update Next.js to secure version and adjust ESLint version"
-          git push https://${{ secrets.GH_TOKEN }}@github.com/GuidoSantiagoReta/snyk-next.git HEAD:mainh
+          git push https://${{ secrets.GH_TOKEN_SNYK }}@github.com/GuidoSantiagoReta/snyk-next.git HEAD:mainh
 
