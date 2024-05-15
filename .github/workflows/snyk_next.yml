@@ -25,7 +25,14 @@ jobs:
       - name: Run Snyk analysis
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }}
-        run: npx snyk test
+        run: |
+          npx snyk test
+          if [ $? -eq 0 ]; then
+            echo "Snyk analysis succeeded."
+          else
+            echo "Snyk analysis failed."
+            exit 1
+          fi
 
       - name: Commit changes
         run: |
