@@ -16,13 +16,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Snyk analysis
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }}  
-        run: npx snyk test
-
       - name: Update Next.js to a secure version
         run: npm install next@14.1.1
+
+      - name: Run Snyk analysis
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }}
+        run: npx snyk test
 
       - name: Commit changes
         run: git add package.json && git commit -m "Update Next.js to secure version" && git push
