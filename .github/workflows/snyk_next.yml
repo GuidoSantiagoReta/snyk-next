@@ -13,8 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Downgrade ESLint
+        run: npm install eslint@8.57.0
+
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Update Next.js to a secure version
         run: npm install next@14.1.1
@@ -25,4 +28,9 @@ jobs:
         run: npx snyk test
 
       - name: Commit changes
-        run: git add package.json && git commit -m "Update Next.js to secure version" && git push
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add package.json
+          git commit -m "Update Next.js to secure version and adjust ESLint version"
+          git push
